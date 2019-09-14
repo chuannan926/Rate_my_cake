@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Rate My cakes</h1>
+  <form (submit)="submitNewCake()">
+    Name:<input type="text" name="new_cake.name"[(ngModel)]="new_cake.name"/>
+    Image:<input type="text" name="new_cake.image"[(ngModel)]="new_cake.image">
+    <input type="submit" value="submit"/>
+  </form>
+
+  <div *ngFor="let cake of all_cakes;">
+    <a (click)="showDetailCake(cake._id)"><img src="{{cake.image}}" alt="{{cake.name}}" width="200px" height="250px"></a>
+    
+    
+     <!-- {{cake.name}}
+     {{ cake._id}} -->
+     <form (submit)="submitNewReview( cake._id )">
+       Rating:
+       <select name="new_review.number" [(ngModel)]="new_review.number">
+         <option value="5">5 Stars</option>
+         <option value="4">4 Stars</option>
+         <option value="3">3 Stars</option>
+         <option value="2">2 Stars</option>
+         <option value="1">1 Stars</option>
+       </select>
+       Comment:
+       <input type="text" name="new_review.comment"[(ngModel)]="new_review.comment"/>
+       <input type="submit" value="New Rate"/>
+     </form>
+  </div>
+
+    
+
+  <!-- if one_cake存在，显示整个detail component这个网页, 如果不存在就不显示，比如在ngOninit   -->
+    <app-details *ngIf ="one_cake" [selected_cake] ="one_cake" [selected_rate] = "average_rate_of_cake"></app-details>
+  
+
+  </body>
+
+
+
+
+
+</html>
